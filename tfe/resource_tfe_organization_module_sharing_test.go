@@ -108,7 +108,7 @@ func TestAccTFEOrganizationModuleSharing_stopSharing(t *testing.T) {
 	})
 }
 
-func testAccTFEOrganizationModuleSharing_basic(rInt1 int, rInt2 int, rInt3 int) string {
+func testAccTFEOrganizationModuleSharing_basic(rInt1, rInt2, rInt3 int) string {
 	return fmt.Sprintf(`
 resource "tfe_organization" "foobar" {
   name = "tst-terraform-%d"
@@ -131,7 +131,7 @@ resource "tfe_organization_module_sharing" "producer" {
 }`, rInt1, rInt2, rInt3)
 }
 
-func testAccTFEOrganizationModuleSharing_emptyOrg(rInt1 int, rInt2 int) string {
+func testAccTFEOrganizationModuleSharing_emptyOrg(rInt1, rInt2 int) string {
 	return fmt.Sprintf(`
 resource "tfe_organization" "foo" {
   name = "tst-terraform-%d"
@@ -144,7 +144,7 @@ resource "tfe_organization" "bar" {
 }
 
 resource "tfe_organization_module_sharing" "foo" {
-  organization = tfe_organization.foo.id 
+  organization = tfe_organization.foo.id
   module_consumers = ["", tfe_organization.bar.id]
 }`, rInt1, rInt2)
 }
@@ -157,7 +157,7 @@ resource "tfe_organization" "foo" {
 }
 
 resource "tfe_organization_module_sharing" "foo" {
-  organization = tfe_organization.foo.id 
+  organization = tfe_organization.foo.id
   module_consumers = []
 }`, rInt1)
 }

@@ -161,7 +161,7 @@ func testAccCheckTFETerraformVersionExists(n string, tfVersion *tfe.AdminTerrafo
 	}
 }
 
-func testAccCheckTFETerraformVersionAttributesBasic(tfVersion *tfe.AdminTerraformVersion, version string, sha string) resource.TestCheckFunc {
+func testAccCheckTFETerraformVersionAttributesBasic(tfVersion *tfe.AdminTerraformVersion, version, sha string) resource.TestCheckFunc {
 	return func(s *terraform.State) error {
 		if tfVersion.URL != "https://www.hashicorp.com" {
 			return fmt.Errorf("Bad URL: %s", tfVersion.URL)
@@ -179,7 +179,7 @@ func testAccCheckTFETerraformVersionAttributesBasic(tfVersion *tfe.AdminTerrafor
 	}
 }
 
-func testAccCheckTFETerraformVersionAttributesFull(tfVersion *tfe.AdminTerraformVersion, version string, sha string) resource.TestCheckFunc {
+func testAccCheckTFETerraformVersionAttributesFull(tfVersion *tfe.AdminTerraformVersion, version, sha string) resource.TestCheckFunc {
 	return func(s *terraform.State) error {
 		if tfVersion.URL != "https://www.hashicorp.com" {
 			return fmt.Errorf("Bad URL: %s", tfVersion.URL)
@@ -217,7 +217,7 @@ func testAccCheckTFETerraformVersionAttributesFull(tfVersion *tfe.AdminTerraform
 	}
 }
 
-func testAccTFETerraformVersion_basic(version string, sha string) string {
+func testAccTFETerraformVersion_basic(version, sha string) string {
 	return fmt.Sprintf(`
 resource "tfe_terraform_version" "foobar" {
   version = "%s"
@@ -226,7 +226,7 @@ resource "tfe_terraform_version" "foobar" {
 }`, version, sha)
 }
 
-func testAccTFETerraformVersion_full(version string, sha string) string {
+func testAccTFETerraformVersion_full(version, sha string) string {
 	return fmt.Sprintf(`
 resource "tfe_terraform_version" "foobar" {
   version = "%s"
@@ -234,7 +234,7 @@ resource "tfe_terraform_version" "foobar" {
   sha = "%s"
   official = false
   enabled = true
-  beta = true 
+  beta = true
   deprecated = true
   deprecated_reason = "foobar"
 }`, version, sha)
